@@ -1,0 +1,23 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: ghost-buster-go
+  region: us-east-2
+  version: "1.19"
+
+availabilityZones: ["us-east-2a", "us-east-2b", "us-east-2c"]
+
+managedNodeGroups:
+- name: nodegroup
+  desiredCapacity: 3
+  instanceType: t2.small
+  ssh:
+    enableSsm: true
+
+cloudWatch:
+ clusterLogging:
+   enableTypes: ["*"]
+
+secretsEncryption:
+  keyARN: arn:aws:kms:us-east-2:085183144779:key/00be4785-b03b-46da-a065-afc790e2616e
